@@ -22,8 +22,6 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class AutoUpdateService extends Service {
-    public AutoUpdateService() {
-    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -38,7 +36,7 @@ public class AutoUpdateService extends Service {
         int anHour = 8 * 60 * 60 * 1000;  //8小时
         long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
         Intent i = new Intent(this,AutoUpdateService.class);
-        PendingIntent pi = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pi = PendingIntent.getActivity(this,0,i,0);
         manager.cancel(pi);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,pi);
         return super.onStartCommand(intent, flags, startId);
